@@ -23,7 +23,7 @@ public:
 	glist list; 
 
 public:
-	strexecute() : list(sizeof(strexecute_record)) {};
+	strexecute() : list() {};
 	
 	void add_command(char* str, void(*f)(int,char**)) 
 		{list.push_back(strexecute_record(str,f));};

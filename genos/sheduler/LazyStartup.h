@@ -45,7 +45,7 @@ class LazyStartup {
 glist timers;
 
 public:
-LazyStartup() : timers(sizeof(lazy_timer)) {}
+LazyStartup() : timers() {}
 
 
 template<typename optype>
@@ -62,10 +62,6 @@ void check();
 };
 
 };};
-
-
-//#define add_lazy_timer(startup, timeout, st, f) (startup._add_lazy_timer(timeout, st, (func_op_t)f, 0))
-//#define add_lazy_timer(startup, timeout, st, f, optype) (startup._add_lazy_timer(timeout, st, (func_op_t)f, sizeof(optype)))
 
 
 #endif

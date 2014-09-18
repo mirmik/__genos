@@ -39,7 +39,7 @@ class SubstShed
 	
 	public:
 	//constr
-	SubstShed() : HStack((sizeof(genos::hard_stack))) {
+	SubstShed() : HStack() {
 	//mainstack = add_stack(300);
 	};	
 	//func

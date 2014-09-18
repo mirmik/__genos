@@ -10,7 +10,8 @@ namespace genos {
 
 enum errno{RINGBUFFER_FULL=0 ,
 			RINGBUFFER_EMPTY,
-			SUBSTSHED};
+			SUBSTSHED,
+			NOTFUNC};
 
 void sysErr (errno n, void* p);
 

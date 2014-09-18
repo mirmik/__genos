@@ -1,6 +1,6 @@
 
 
-#include <genos/container/allocator_malloc.h>
+#include <genos/allocator/allocator_malloc.h>
 
 
 namespace genos {
@@ -8,7 +8,7 @@ namespace genos {
 
 
 ptr_t allocator_malloc::allocate (size_t sz) {return malloc(sz);};
-void allocator_malloc::deallocate (ptr_t p , size_t sz) {free(p);};
+void allocator_malloc::deallocate (ptr_t p) {free(p);};
 
 size_t getFreeMemory(){};
 

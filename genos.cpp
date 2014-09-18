@@ -2,7 +2,7 @@
 
 
 #include <genos.h>
-#include <genos/container/allocator_malloc.h>
+#include <genos/allocator/allocator_malloc.h>
 #include <genos/console/strexecute.h>
 #include <genos/container/hard_stack.h>
 

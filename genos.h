@@ -32,7 +32,7 @@ void printexec (void* obj){
 
 //#define GENOS_ERRSERV 
 //to activate errserver.
-//#include  <genos/debug/errserv.h>
+#include  <genos/debug/errserv.h>
 // platform functions.
 #include  <genos/platform.h>
 

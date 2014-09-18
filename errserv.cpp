@@ -8,10 +8,10 @@ namespace genos {
 //#ifdef GENOS_ERRSERV 
 void sysErr (errno n, void* p) {
  //stdout << "REGISTREDERR¹ " << n << " objaddr " << genos::hex << p;
+ delay(100);
  debug_print("REGISTREDERR¹");
  dpr_inthex((int)n);
  dpr_tab();
- delay(10);
  halt();
  };
 //#else
