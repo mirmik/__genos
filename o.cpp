@@ -14,14 +14,6 @@ size_t b_ostream::write(const byte *buffer, size_t size)
 }
 
 
-size_t ostream::print(gstring& gs)
-{write(reinterpret_cast<byte*>(gs.begin()),gs.string_size);
-};
-
-size_t ostream::println(gstring& gs)
-{write(reinterpret_cast<byte*>(gs.begin()),gs.string_size);
-};
-
 size_t ostream::print(const char str[])
 {
   return write(str);

@@ -5,7 +5,8 @@
 
 
 #include "genos.h"
-#include "genos/byte_container/gstring.h"
+#include "genos/io/printable.h"
+//#include "genos/byte_container/gstring.h"
 namespace genos { 
 class gstring;
 
@@ -69,17 +70,43 @@ size_t println(void);
 
 //ostream& operator<<(gstring& gs){write(reinterpret_cast<byte*>(gs.begin()),gs.string_size);
 //};
+
+/*
+template<typename T, typename T2>
+ostream& operator<<(std::pair<T,T2> val){
+print(val.first,val.second);
+return *this;
+};*/
+
+
+
+ostream& operator<<(printable& obj){
+obj.printTo(*this);
+return *this;
+};
+/*
+template<typename T>
+ostream& operator<<(T val){
+print(val);
+return *this;
+};*/
+
+ostream& operator<<(char val){
+write(val);
+return *this;
+}
+
 typedef ostream&(*func_o)(ostream&);
 ostream& endl(ostream& o);
 
 ostream& operator<<(func_o f){
 return f(*this);
 };
-
+/*
 ostream& operator<<(gstring& gs){
 write(reinterpret_cast<byte*>(gs.begin()),gs.string_size);
 return *this;
-};
+};*/
 
 
 using b_ostream::write;

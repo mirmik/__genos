@@ -11,7 +11,7 @@
 
 using namespace genos;
 
-glist lst(sizeof(float));
+glist lst;
 
 void print_op(void* op)
 {

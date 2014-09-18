@@ -6,12 +6,12 @@
 
 #include <genos/container/dynamic_array.h>
 //class genos::ringbuffer;
-//#include <genos/io/ringbuffer.h>
+#include <genos/io/printable.h>
 
 namespace genos {
 
 
-class gstring : public dynamic_array {
+class gstring : public dynamic_array, public printable {
 	public:
 	size_t string_size;
 	
@@ -59,6 +59,11 @@ class gstring : public dynamic_array {
 	reserve(string_size+1);
 	*((static_cast<char*>(data)+string_size))=0;
 	return static_cast<char*>(data);};
+	
+	ostream& printTo (ostream& o){
+	int i=0;
+	while(i<string_size) {o << *(static_cast<char*>(data+i));i++;}
+	};
 	
 	char* begin() {return static_cast<char*>(data);};
 	char* end() {return static_cast<char*>(data) + string_size;};
