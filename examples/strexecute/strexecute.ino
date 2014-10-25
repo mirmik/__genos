@@ -1,6 +1,10 @@
 
 #include <genos.h>
 #include <genos/console/strexecute.h>
+#include <genos/container/ringbuffer.h>
+#include <genos/platform_drv.h>
+//#include "HardwareSerial.h"
+
 
 
 void task1(int, char**)
@@ -19,11 +23,11 @@ void task3(int argc, char** argv)
 {
 int i=0;
 Serial.println("\ntask3 was executed with numeric parametr");
-Serial.print("argv[0]:\t"); Serial.println(argv[0]);
-Serial.print("argv[1]:\t"); Serial.println(atoi(argv[1]));
-Serial.print("argv[2]:\t"); Serial.println(atof(argv[2]));
+Serial << "argv[0]:\t" << argv[0] << genos::endl;
+Serial << "argv[1]:\t" << atoi(argv[1]) << genos::endl;
+Serial << "argv[2]:\t" << atof(argv[2]) << genos::endl;
 }
-
+;
 void setup() {
   Serial.begin(9600);
   strExec.add_command("task1",task1);

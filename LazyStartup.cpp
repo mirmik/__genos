@@ -4,7 +4,7 @@
 #include <genos/sheduler/LazyStartup.h>
 #include <genos/system/time.h>
 #include <genos/container/dynamic_obj.h>
-#include <genos/algorithm.h>
+#include <genos/gstl_impl/algorithm>
 
 namespace genos{
 namespace sheduler {
@@ -23,7 +23,7 @@ void check_and_run (void* obj){
 	
 void LazyStartup::check()
 {
-for_each(timers.begin(),timers.end(),check_and_run);
+gstd::for_each_ptr(timers.begin(),timers.end(),check_and_run);
 };
 
 

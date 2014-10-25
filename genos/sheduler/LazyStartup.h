@@ -5,7 +5,7 @@
 #define LAZY_STARTUP_H
 
 #include <genos.h>
-#include <genos/algorithm.h>
+#include <genos/stl_impl/algorithm>
 #include <genos/container/glist.h>
 //#include <genos/container/space.h>
  

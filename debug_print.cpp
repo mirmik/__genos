@@ -137,7 +137,7 @@ void debug_print_dump(void* address, uint32_t size)
 
 
 #ifdef ARDUINO
-#include "Arduino.h"
+#include <avr/io.h> 
 void debug_putchar(char c){
 while ((UCSR0A & (1 << UDRE0)) == 0) {};  UDR0=c; };
 #endif

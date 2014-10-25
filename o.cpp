@@ -152,6 +152,7 @@ size_t ostream::printNumber(unsigned long n, byte base) {
   return write(str);
 }
 
+
 size_t ostream::printFloat(double number, byte digits) 
 { 
   size_t n = 0;
@@ -201,7 +202,13 @@ size_t ostream::printFloat(double number, byte digits)
 ostream& endl (ostream& o)
 {
 o.write('\n');
+o.NumPr = 10;
 return o; 
 };
 
+ostream& hex (ostream& o)
+{
+o.NumPr = 16;
+return o; 
+};
 };

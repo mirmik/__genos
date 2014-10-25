@@ -2,7 +2,7 @@
 
 #include <genos.h>
 #include <genos/container/gvector.h>
-#include <genos/algorithm.h>
+#include <genos/stl_impl/algorithm>
 
 using namespace genos;
 

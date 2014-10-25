@@ -17,7 +17,7 @@ namespace genos {
 class dynamic_array{
 		protected:
 		void* data;
-		size_t data_size;
+		int data_size;
 		allocator* alloc;
 		
 		dynamic_array() : data(0), data_size(0), alloc(&malloc_allocator)  {};
@@ -27,13 +27,18 @@ class dynamic_array{
 		public:
 		void reserve(size_t n);    //need more memory!!!
 		
+		//void upsize(size_t n){
+		//if (data_size < n) reserve(n);
+	//}
+	
+//	void downsize(size_t n){
+//		if (data_size > n) reserve(n);
+//	}
 
+	
 
-
-
-~dynamic_array() {alloc->deallocate(data);
-Serial.println("DESTRUCT");};
-
+//~dynamic_array() {alloc->deallocate(data);};
+		void destruct(){alloc->deallocate(data);};
 
 
 };	//class

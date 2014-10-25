@@ -10,20 +10,19 @@ namespace genos {
 	//	allocator* alloc;
 	
 	
-	void dynamic_array::reserve(size_t n){
-		if(n > data_size) data_size=n;              //We never shrink...
-			void* temp_ptr = data;
-			size_t temp_size = data_size;
+	void dynamic_array::reserve(size_t new_size){
+		if (new_size == data_size) return;
+		
+		void* old_ptr = data;
+		size_t old_size = data_size;
 
-			data_size = n;
-			data =  alloc->allocate(data_size);
-	
-			memcpy(data, temp_ptr, temp_size);	
-//if (temp_ptr==0) - its allocator problems....			
-			//genos::deallocate (data, temp_size);
-			alloc->deallocate (temp_ptr);
+		data_size = new_size;
+		data =  alloc->allocate(new_size);
+			
+		if (old_ptr!=0) {
+		memcpy(data, old_ptr, old_size > new_size ? new_size : old_size);	
+		alloc->deallocate (old_ptr); };
 	}
-	
 	
 	
 	

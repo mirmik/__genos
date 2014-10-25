@@ -1,0 +1,39 @@
+
+//#include <cstdlib>
+#include <genos/stl_impl/iterator_base>
+#include <genos/stl_impl/utility.h>
+#include <genos/stl_impl/functional>
+
+#ifndef __GSTD_HEADER_ALGORITHM
+#define __GSTD_HEADER_ALGORITHM 1
+
+//Elliminate any previously defined macro
+#undef min
+#undef max
+
+#pragma GCC visibility push(default)
+
+namespace gstd{
+
+	// subclause _lib.alg.nonmodifying_, non-modifying sequence operations:
+	template<class InputIterator, class Function> _UCXXEXPORT
+		Function for_each_ptr(InputIterator first, InputIterator last, Function f)
+	{
+		while(first !=last){
+			f(first.ptr());
+			++first;
+		}
+		return f;
+	}
+
+
+	
+	
+}
+
+#pragma GCC visibility pop
+
+#endif
+
+
+

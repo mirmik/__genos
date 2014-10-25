@@ -2,7 +2,7 @@
 #include <genos.h>
 #include <genos/container/allocator_pull.h>
 #include <genos/container/allocator_pull_manager.h>
-#include <genos/algorithm.h>
+#include <genos/stl_impl/algorithm>
 #include <genos/debug/debug_print.h>
 #include <genos/container/hard_stack.h>
 #include <genos/sheduler/subst_shed.h>

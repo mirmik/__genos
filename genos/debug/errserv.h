@@ -11,7 +11,8 @@ namespace genos {
 enum errno{RINGBUFFER_FULL=0 ,
 			RINGBUFFER_EMPTY,
 			SUBSTSHED,
-			NOTFUNC};
+			SERIAL_ERROR,
+			MALLOC_ERROR};
 
 void sysErr (errno n, void* p);
 

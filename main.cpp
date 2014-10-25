@@ -2,41 +2,43 @@
 
 
 
-
-#include "Arduino.h"
+//#include <genos/platform/Arduino.h>
+//#include <Arduino.h>
 #include <genos.h>
-#include <genos/debug/debug_print.h>
-#include <genos/container/hard_stack.h>
-#include <genos/container/glist.h>
-#include <genos/alloc.h>
-#include <genos/algorithm.h>
-#include <genos/sheduler/subst_shed.h>
+//#include <genos/debug/debug_print.h>
+//#include <genos/container/hard_stack.h>
+//#include <genos/container/glist.h>
+//#include <genos/alloc.h>
+//#include <genos/stl_impl/algorithm>
+
+#include <genos_obj.h>
+#include <genos_obj_subst.h>
+
+#include <genos/platform_drv.h>
+//#include <genos/io/o.h>
 
 
-extern genos::hard_stack* mainstack;
-genos::hard_stack* teststack;
-
-genos::SubstShed Shed;
-
-void format(void * obj)
-{reinterpret_cast<genos::hard_stack*>(obj)->format();};
-
-
+extern void init2();
 int main() {
 
 init();
-Serial.begin(9600);
-debug_print("Genos main\n");
+init2();
 
-//delay(10);
-// STACK INSTALLATION
-mainstack = Shed.add_stack(300);
-SP=mainstack->begin();
-Shed.now = mainstack;
+Serial.begin(115200);
+//Serial.tx.engage(&malloc_allocator,4);
+//Serial.rx.engage(&malloc_allocator,4);
+
+strmout.connect(&Serial);
+strmdebug.connect(&Serial);
+
+strmout << genos::endl << "System is loaded. wait 1 sec:" << genos::endl;
+delay(1000);
+
+
 __malloc_heap_end=(char*)RAMEND;
-// STACK INSTALLATION
 
-Serial.println("Stack has been moved\n");
+proclist.init((void*)RAMEND);
+subst.init();
 
 setup();
 

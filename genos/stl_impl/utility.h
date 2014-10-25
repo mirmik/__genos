@@ -21,12 +21,12 @@
 #include <genos/stl_impl/basic_definitions>
 
 
-#ifndef __STD_HEADER_UTILITY
-#define __STD_HEADER_UTILITY 1
+#ifndef __GSTD_HEADER_UTILITY
+#define __GSTD_HEADER_UTILITY 1
 
 #pragma GCC visibility push(default)
 
-namespace std{
+namespace gstd{
 
 	namespace rel_ops {
 		template<class T> inline bool operator!=(const T& x, const T& y){

@@ -7,7 +7,6 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <genos.h>
 
 namespace genos {
 
@@ -15,15 +14,24 @@ namespace genos {
 class allocator
 {
 public:
-virtual ptr_t allocate (size_t sz);
-virtual void deallocate (ptr_t p);
+virtual void* allocate (size_t sz);
+virtual void deallocate (void* p);
 
 virtual size_t getFreeMemory(){};
 
-virtual ptr_t rebind(){};
+virtual void* rebind(){};
 virtual void engage(){};
-};
+
+
 
 };
+
+
+};
+
+
+void* operator new(size_t sz, genos::allocator* a);
+void* operator new(size_t sz, genos::allocator* a, size_t space);
+void operator delete(void* p, genos::allocator* a);
 
 #endif

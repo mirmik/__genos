@@ -1,9 +1,9 @@
 
 #include "genos.h"
-#include "genos/byte_container/quantumbuffer.h"
-#include "genos/byte_container/ringbuffer.h"
+#include "genos/container/quantumbuffer.h"
+#include "genos/container/ringbuffer.h"
 #include "genos/io/o.h"
-#include "genos/byte_container/gstring.h"
+#include "genos/container/gstring.h"
 
 
 

@@ -4,18 +4,33 @@
 #define GENOS_O_H
 
 
-#include "genos.h"
+//#include "genos.h"
 #include "genos/io/printable.h"
-//#include "genos/byte_container/gstring.h"
+#include "stdio.h"
+#include "genos/platform.h"
+//#include <genos/io/nullstrm.h>
+//#include "genos/container/gstring.h"
 namespace genos { 
 class gstring;
 
+typedef size_t inthex;
 
 class b_ostream{
 public:
 virtual size_t write(byte c) = 0;
+//virtual size_t write(char c){write((byte)c);};
 virtual size_t write(const byte *buffer, size_t size);
+
+
+size_t write(const char *buffer, size_t size){write((const byte*)buffer, size);};
 //virtual size_t available();
+size_t write(const char *str) {
+if (str == NULL) return 0;
+return write(reinterpret_cast<const byte*>(str), strlen(str));
+}
+//size_t write(const char *buffer, size_t size) {
+//return write(reinterpret_cast<const byte*>(buffer), size);
+//}
 };
 
 
@@ -28,19 +43,22 @@ virtual size_t write(const byte *buffer, size_t size);
 class ostream  : public b_ostream
 {
 private:
-int write_error;
+b_ostream* strm;
+//int write_error;
 size_t printNumber(unsigned long, byte);
 size_t printFloat(double, byte);
 protected:
 public:
-ostream() {}
-size_t write(const char *str) {
-if (str == NULL) return 0;
-return write(reinterpret_cast<const byte*>(str), strlen(str));
-}
-size_t write(const char *buffer, size_t size) {
-return write(reinterpret_cast<const byte*>(buffer), size);
-}
+uint8_t NumPr;
+
+virtual size_t write(byte c) {strm->write(c);};
+
+ostream(b_ostream* _strm) : strm(_strm), NumPr(10) {}
+//ostream() : strm() {}
+
+void connect (b_ostream* _strm) {strm=_strm;}
+
+
 //size_t print(const __FlashStringHelper *);
 //size_t print(const String &);
 size_t print(const char[]);
@@ -51,6 +69,19 @@ size_t print(unsigned int, int = DEC);
 size_t print(long, int = DEC);
 size_t print(unsigned long, int = DEC);
 size_t print(double, int = 2);
+
+size_t printByte(byte c)
+{
+print(c>>4,HEX);
+print(c%16,HEX);
+};
+
+
+size_t printByteBin(byte c)
+{
+for (int i=7; i >= 0; i--)
+write((c & (1 << i)) ? '1' : '0');
+};
 
 size_t print(gstring& gs);
 size_t println(gstring& gs);
@@ -68,45 +99,29 @@ size_t println(double, int = 2);
 //size_t println(const Printable&);
 size_t println(void);
 
-//ostream& operator<<(gstring& gs){write(reinterpret_cast<byte*>(gs.begin()),gs.string_size);
-//};
-
-/*
-template<typename T, typename T2>
-ostream& operator<<(std::pair<T,T2> val){
-print(val.first,val.second);
-return *this;
-};*/
-
-
-
-ostream& operator<<(printable& obj){
-obj.printTo(*this);
-return *this;
-};
-/*
-template<typename T>
-ostream& operator<<(T val){
-print(val);
-return *this;
-};*/
-
-ostream& operator<<(char val){
-write(val);
-return *this;
-}
-
 typedef ostream&(*func_o)(ostream&);
-ostream& endl(ostream& o);
 
-ostream& operator<<(func_o f){
-return f(*this);
-};
-/*
-ostream& operator<<(gstring& gs){
-write(reinterpret_cast<byte*>(gs.begin()),gs.string_size);
-return *this;
-};*/
+
+ostream& endl(ostream& o);
+ostream& operator<<(func_o f){return f(*this);};
+
+ostream& operator<<(printable& obj){obj.printTo(*this); return *this;};
+ostream& operator<<(char val){write(val);return *this;};
+//ostream& operator<<(byte val){write(val);return *this;};
+ostream& operator<<(uint8_t val){printNumber(val, NumPr);return *this;};
+ostream& operator<<(int val){printNumber(val, NumPr);return *this;};
+ostream& operator<<(unsigned int val){printNumber(val, NumPr);return *this;};
+ostream& operator<<(long long int val){printNumber(val, NumPr);return *this;};
+
+ostream& operator<<(long val){printNumber(val, NumPr);return *this;};
+ostream& operator<<(unsigned long val){printNumber(val, NumPr);return *this;};
+ostream& operator<<(double val){printFloat(val, 2);return *this;};
+ostream& operator<<(float val){printFloat(val, 2);return *this;};
+
+ostream& operator<<(const char* val){write(val);return *this;};
+
+
+//ostream& operator<<(inthex val){print(val,HEX);return *this;};
 
 
 using b_ostream::write;
@@ -114,6 +129,7 @@ using b_ostream::write;
 
 
 ostream& endl (ostream& o);
+ostream& hex (ostream& o);
 
 };
 

@@ -4,6 +4,7 @@
 
 
 #define dpr_tab() {debug_putchar('\t');}
+#define dprln() {debug_putchar('\n');}
 #define dwr(a,b) {debug_write(a,b);}
 #define dpr_inthex(a) debug_printhex_int32((int32_t)a)
 #define printd(a) {debug_print(a);}

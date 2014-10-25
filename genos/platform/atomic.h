@@ -1,0 +1,3 @@
+
+#define ATOMIC() uint8_t GENOS_ATOMIC_TEMP = SREG; cli();
+#define DEATOMIC() SREG = GENOS_ATOMIC_TEMP; 

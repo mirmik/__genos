@@ -3,24 +3,29 @@
 
 
 #include <genos/console/strexecute.h>
+#include <genos_obj.h>
+#include <genos_obj_exec.h>
 
 
 int interpreter(int argc, const char* const* argv){
 
-for (genos::glist::iterator it = strExec.list.begin() ; it != strExec.list.end() ; it++)
+for (genos::list<genos::strexecute_record>::iterator it = strExec.lst.begin() ; it != strExec.lst.end() ; it++)
+{
 
-if (!strcmp(argv[0],get_objptr<genos::strexecute_record>(it)->name))
+if (!strcmp(argv[0],(it->name)))
 {
 //tempstrm=(Stream*)stdio;
 //stdio=strm;
-((void (*)(int, const char* const*))(get_objptr<genos::strexecute_record>(it)->func))(argc,argv);
+it->func(argc,(char**)argv);
 //stdio=tempstrm; 
 return 0;
-}
+};
+};
 //pr("Command \"\033[35m");
 //pr("Command \"");
 //pr(argv[0]);
 //prln("\033[0m\" not found. Use \"\033[33mlist\033[0m\" instruction.");
+
 //prln("\" not found.");
 
 return 0;
@@ -44,11 +49,20 @@ void split (char* temp, argvc_t &a)
 }
 
 
-void strexecute(char* c)
+void strexec(char* c)
 {
 		argvc_t a;
 		char* argv [10];
 		a.argv=argv;
 		split(c,a);
 		interpreter(a.argc,a.argv);
+};
+
+
+
+//bool exec_comp(const genos::strexecute_record& a, const genos::strexecute_record& b) 
+//{return(strcmp(b.name,a.name) < 0 ? true : false);};
+namespace genos{
+bool operator<(const strexecute_record& a, const strexecute_record& b) 
+{return(strcmp(a.name,b.name) < 0 ? true : false);};
 };

@@ -21,18 +21,18 @@ class dynamic_obj {
 		size_t elemsize() {return element_size;};
 		//void elemcpy(void* dest,void* src) ;
 };	//class
-
+/*
 class abstract_iterator {
 	public:
 	virtual void* operator*();
 	};
-	
+	*/
 };
 	
-	
+	/*
 template<typename valtype> inline valtype& get_obj(genos::abstract_iterator &it) {return *static_cast<valtype*>(*it);};
 template<typename valtype> inline valtype* get_objptr(genos::abstract_iterator &it) {return static_cast<valtype*>(*it);};
-	
+	*/
 	
 	
 #endif

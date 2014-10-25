@@ -6,29 +6,21 @@
 #ifndef GENOS
 #define GENOS
 
+
 #include "stdlib.h"
 #include "genos/debug/debug_print.h"
 
-#ifdef ARDUINO
-size_t stack_pointer();
-#endif
-
-#include <genos/stl_impl/utility.h>
-#include <genos/container/hard_stack.h>
-
-
-extern genos::hard_stack* mainstack;
-namespace genos{
-typedef void* ptr_t;
-void printaddr(void*);
+#define INTCOM
+#define MALLOC_ALLOCATOR
+#define STREAM_OUTPUT
+#define SUBST_SHED
+#define PROCSTATE_OPERATE
 
 
+#define BOARD_CRIUS
+//#define ARDUINO_SPI
+//#define CRIUS_SPI_DATAFLASH
 
-template <typename T>
-void printexec (void* obj){
-	static_cast<T*>(obj)->print();
-};
-};
 
 //#define GENOS_ERRSERV 
 //to activate errserver.
@@ -36,8 +28,10 @@ void printexec (void* obj){
 // platform functions.
 #include  <genos/platform.h>
 
+#define MACHINE_NAME "machine"
 
 
+extern void DoNothing();
 #endif
 
 
